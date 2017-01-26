@@ -116,7 +116,7 @@ extension ProductsViewController {
         self.refreshControl.endRefreshing()
         
         // Get products
-        CourseBoardAPI.getCurrentProducts { (products: [Product]?, error: NSError?) in
+        CourseBoardAPI.getCurrentProducts { [weak self] (products: [Product]?, error: NSError?) in
             if error == nil {
                 
                 guard let products = products else {
@@ -126,7 +126,7 @@ extension ProductsViewController {
                 let filteredProducts = products.filter{$0.liveUrl != nil}
                 
                 // Set up sections
-                self.products.value = filteredProducts.map {SectionModel(model: nil, items: [$0])}
+                self?.products.value = filteredProducts.map {SectionModel(model: nil, items: [$0])}
             }
             else {
                 // error!

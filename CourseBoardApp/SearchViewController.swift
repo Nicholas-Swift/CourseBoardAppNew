@@ -49,9 +49,6 @@ class SearchViewController: UIViewController {
             return // error!
         }
         
-        print("username: \(filteredUsers.value[indexPath.row].fullname)")
-        print("id: \(filteredUsers.value[indexPath.row].id)")
-        
         destination.userId = filteredUsers.value[indexPath.row].id
     }
 }
@@ -120,13 +117,13 @@ extension SearchViewController {
         self.filteredUsers.value = []
         
         // Add instructors
-        CourseBoardAPI.getInstructors { (instructors: [User]?, error: NSError?) in
+        CourseBoardAPI.getInstructors { [weak self] (instructors: [User]?, error: NSError?) in
             if error == nil {
                 guard let instructors = instructors else {
                     return //error!
                 }
-                self.users.value.append(contentsOf: instructors)
-                self.filteredUsers.value.append(contentsOf: instructors)
+                self?.users.value.append(contentsOf: instructors)
+                self?.filteredUsers.value.append(contentsOf: instructors)
             }
             else {
                 //error!
@@ -134,13 +131,13 @@ extension SearchViewController {
         }
         
         // Add students
-        CourseBoardAPI.getStudents { (students: [User]?, error: NSError?) in
+        CourseBoardAPI.getStudents { [weak self] (students: [User]?, error: NSError?) in
             if error == nil {
                 guard let students = students else {
                     return //error!
                 }
-                self.users.value.append(contentsOf: students)
-                self.filteredUsers.value.append(contentsOf: students)
+                self?.users.value.append(contentsOf: students)
+                self?.filteredUsers.value.append(contentsOf: students)
             }
             else {
                 //error!

@@ -13,13 +13,12 @@ import Firebase
 class CourseBoardAPI {
     
     static var authToken = ""
+    //static let baseUrl = "http://localhost:1337"
     static let baseUrl = "https://meancourseboard.herokuapp.com"
     
     static var datRef = FIRDatabase.database().reference()
     static var storRef = FIRStorage.storage().reference()
     
     static var me: User?
-    
-    //static let baseUrl = "http://localhost:1337"
     
 }

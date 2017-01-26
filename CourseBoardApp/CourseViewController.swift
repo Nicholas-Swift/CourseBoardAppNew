@@ -20,7 +20,7 @@ class CourseViewController: UIViewController {
     var course: Course?
     var courseId: String! {
         didSet {
-            CourseBoardAPI.getCourse(id: courseId) { (course: Course?, error: NSError?) in
+            CourseBoardAPI.getCourse(id: courseId) { [weak self] (course: Course?, error: NSError?) in
                 
                 if let _ = error {
                     return //error!
@@ -30,8 +30,8 @@ class CourseViewController: UIViewController {
                     return //error!
                 }
                 
-                self.course = course
-                self.tableView.reloadData()
+                self?.course = course
+                self?.tableView.reloadData()
             }
         }
     }
@@ -45,16 +45,16 @@ class CourseViewController: UIViewController {
     
     // UI Elements
     
-    @IBOutlet weak var moreBarButton: UIBarButtonItem!
+    //@IBOutlet weak var moreBarButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var belowNavView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var emptySegmentLabel: UILabel!
     
     // UI Actions
-    @IBAction func moreBarAction(_ sender: Any) {
-        setupActionView()
-    }
+//    @IBAction func moreBarAction(_ sender: Any) {
+//        setupActionView()
+//    }
     
     // View Controller
     
@@ -70,6 +70,9 @@ class CourseViewController: UIViewController {
         // Setup Table View
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // Set up nav item
+        navigationItem.title = course?.title!
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -189,13 +192,13 @@ extension CourseViewController {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let newPostAction = UIAlertAction(title: "New Post", style: .default, handler: nil)
+        //let newPostAction = UIAlertAction(title: "New Post", style: .default, handler: nil)
         
         let unenrollCourseAction = UIAlertAction(title: "Unenroll Course", style: .destructive, handler: nil)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        alert.addAction(newPostAction)
+        //alert.addAction(newPostAction)
         alert.addAction(unenrollCourseAction)
         alert.addAction(cancelAction)
         
@@ -308,12 +311,15 @@ extension CourseViewController: UITableViewDelegate, UITableViewDataSource {
             //cell.dateLabel.text = course?.posts?[indexPath.section]
             cell.body = course?.posts?[indexPath.section].body ?? "NIL"
             return cell
-            
         // Participants
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CourseParticipantTableViewCell") as! CourseParticipantTableViewCell
-            cell.nameLabel.text = course?.students?[indexPath.row].fullname ?? "NIL"
-            cell.usernameLabel.text = course?.students?[indexPath.row].username ?? "NIL"
+            
+            cell.user = course?.students?[indexPath.row]
+            
+//            cell.nameLabel.text = course?.students?[indexPath.row].fullname ?? "NIL"
+//            cell.usernameLabel.text = course?.students?[indexPath.row].username ?? "NIL"
+            
             return cell
 
         default:

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		010DDFC31E0F43B700CDE178 /* ProfileProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010DDFC21E0F43B700CDE178 /* ProfileProductTableViewCell.swift */; };
 		010DDFC51E0F43C300CDE178 /* ProfileCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010DDFC41E0F43C300CDE178 /* ProfileCourseTableViewCell.swift */; };
+		0113373D1E3893DA00A4E1F3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0113373C1E3893DA00A4E1F3 /* LoginViewController.swift */; };
 		0116219C1E2CC5B40072D2C8 /* GeneralSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0116219B1E2CC5B40072D2C8 /* GeneralSearchViewController.swift */; };
 		0116219E1E2D70B60072D2C8 /* ProductUpdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0116219D1E2D70B60072D2C8 /* ProductUpdateTableViewCell.swift */; };
 		011621A01E2D70C20072D2C8 /* ProductBasicsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0116219F1E2D70C20072D2C8 /* ProductBasicsTableViewCell.swift */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		010DDFC21E0F43B700CDE178 /* ProfileProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileProductTableViewCell.swift; sourceTree = "<group>"; };
 		010DDFC41E0F43C300CDE178 /* ProfileCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCourseTableViewCell.swift; sourceTree = "<group>"; };
+		0113373C1E3893DA00A4E1F3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0116219B1E2CC5B40072D2C8 /* GeneralSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchViewController.swift; sourceTree = "<group>"; };
 		0116219D1E2D70B60072D2C8 /* ProductUpdateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductUpdateTableViewCell.swift; sourceTree = "<group>"; };
 		0116219F1E2D70C20072D2C8 /* ProductBasicsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductBasicsTableViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		0185FCC61DD1A07C00BF91A3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				0113373C1E3893DA00A4E1F3 /* LoginViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				0185FCD51DD1C85B00BF91A3 /* CoursesCourseTableViewCell.swift in Sources */,
 				0185FCCF1DD1B27A00BF91A3 /* ImageHelper.swift in Sources */,
 				0179235E1E15FCAF000C7D92 /* CourseInformationTableViewCell.swift in Sources */,
+				0113373D1E3893DA00A4E1F3 /* LoginViewController.swift in Sources */,
 				01723CBA1E0A12220006D500 /* UpdateRequestHelper.swift in Sources */,
 				015D84CD1DD3C7420057F1E7 /* CoursePostTableViewCell.swift in Sources */,
 				01723CB01E0A12220006D500 /* Course.swift in Sources */,

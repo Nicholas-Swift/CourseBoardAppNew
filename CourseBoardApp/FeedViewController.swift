@@ -66,26 +66,6 @@ extension FeedViewController {
     
     func functionalitySetup() {
         
-        CourseBoardAPI.login(email: "nswift", password: "q1w2e3") { (bool: Bool, error: NSError?) in
-            // Get posts
-            CourseBoardAPI.getPostsFromEnrolledCourses(userId: "578524a4a4e38b03006a2be6", complete: { (posts: [Post]?, error: NSError?) in
-                if error == nil {
-                    
-                    guard let posts = posts else {
-                        return // error happened
-                    }
-                    
-                    // Update posts and tableview
-                    self.posts = posts
-                    self.tableView.reloadData()
-                    
-                }
-                else {
-                    // error happened
-                }
-            })
-        }
-        
     }
     
 }

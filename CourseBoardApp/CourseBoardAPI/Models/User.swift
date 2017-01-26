@@ -178,22 +178,25 @@ class User {
             return
         }
         
-        CourseBoardAPI.getPicUrl(id: self.id!) { (url: String?, error: Error?) in
+        CourseBoardAPI.getPicUrl(id: self.id!) { [weak self] (url: String?, error: Error?) in
             // make sure can load url
             guard let url = url else {
                 return // error
             }
             let realUrl = URL(string: url)!
-            self.profilePic = nil
+            self?.profilePic = nil
             
-            self.tempImageView.af_setImage(withURL: realUrl, completion: { response in
+            self?.tempImageView.af_setImage(withURL: realUrl, completion: { response in
                 guard let data = response.data else {
                     return // error
                 }
                 
                 let image = UIImage(data: data)
-                self.profilePic = image
-                User.picsDict[self.id!] = image
+                self?.profilePic = image
+                
+                if let s = self {
+                    User.picsDict[s.id!] = image
+                }
             })
         }
     }

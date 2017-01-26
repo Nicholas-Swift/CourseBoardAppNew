@@ -15,7 +15,6 @@ class SearchUserTableViewCell: UITableViewCell {
     // Variables
     var user: User! {
         didSet {
-            
             fullnameLabel.text = user.fullname ?? ""
             usernameLabel.text = user.username ?? ""
             profilePictureImageView.image = user.profilePic

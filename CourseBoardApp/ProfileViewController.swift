@@ -74,9 +74,6 @@ class ProfileViewController: UIViewController {
     @IBAction func productsSegmentAction(_ sender: Any) {
         currentSegment = ProfileSegmentedControl.products
     }
-    @IBAction func feedbackSegmentAction(_ sender: Any) {
-        currentSegment = ProfileSegmentedControl.feedback
-    }
     
     // View Controller
     
@@ -148,6 +145,12 @@ extension ProfileViewController {
 extension ProfileViewController {
     
     func styleSetup() {
+        // Set up Tab Bar style
+        self.tabBarController?.tabBar.layer.borderWidth = 0.5
+        self.tabBarController?.tabBar.layer.borderColor = ColorHelper.redditLightGrayColor.cgColor
+        self.tabBarController?.tabBar.clipsToBounds = true
+        self.tabBarController?.tabBar.isTranslucent = false
+        
         // Set up Nav Bar style
         self.navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(UIColor.white), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage.imageWithColor(ColorHelper.redditLightGrayColor)

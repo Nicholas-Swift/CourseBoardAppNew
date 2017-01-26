@@ -14,7 +14,7 @@ class ProductViewController: UIViewController {
     var product: Product?
     var productId: String! {
         didSet {
-            CourseBoardAPI.getProduct(id: productId) { (product: Product?, error: NSError?) in
+            CourseBoardAPI.getProduct(id: productId) { [weak self] (product: Product?, error: NSError?) in
                 
                 if let _ = error {
                     return //error!
@@ -24,12 +24,12 @@ class ProductViewController: UIViewController {
                     return //error!
                 }
                 
-                self.product = product
-                self.tableView.reloadData()
+                self?.product = product
+                self?.tableView.reloadData()
                 
                 // Start loading up all updates
-                CourseBoardAPI.getUpdates(productId: product.id!, complete: { (updates: [Update]?, error: NSError?) in
-                    self.product?.updates = updates
+                CourseBoardAPI.getUpdates(productId: product.id!, complete: { [weak self] (updates: [Update]?, error: NSError?) in
+                    self?.product?.updates = updates
                 })
                 
             }
@@ -44,12 +44,12 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var belowNavView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var emptySegmentLabel: UILabel!
-    @IBOutlet weak var moreBarButton: UIBarButtonItem!
+    //@IBOutlet weak var moreBarButton: UIBarButtonItem!
     
     // UI Actions
-    @IBAction func moreBarAction(_ sender: Any) {
-        setupActionView()
-    }
+//    @IBAction func moreBarAction(_ sender: Any) {
+//        setupActionView()
+//    }
     
     // View Controller
     
@@ -65,6 +65,9 @@ class ProductViewController: UIViewController {
         // Setup Table View
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // Set up title
+        navigationItem.title = product?.name!
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,6 +85,8 @@ class ProductViewController: UIViewController {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
+    
+    // Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "ToProfileViewController" {
@@ -144,7 +149,7 @@ extension ProductViewController {
         }
         
         // Update table view
-        //tableView.contentOffset = CGPoint(x: tableView.contentOffset.x, y: 0)
+        //tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         tableView.reloadData()
         
         // Unhide empty string?
@@ -193,6 +198,8 @@ extension ProductViewController {
             }
         }
         
+        print((product?.id!)!)
+        
         let leaveProductAction = UIAlertAction(title: leaveTuple.0, style: leaveTuple.1, handler: leaveTuple.2)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -204,13 +211,35 @@ extension ProductViewController {
     }
     
     func joinProduct(alert: UIAlertAction) {
-        CourseBoardAPI.joinProduct(id: (product?.id)!) { (bool: Bool?, error: NSError?) in
+        CourseBoardAPI.joinProduct(id: (product?.id)!) { [weak self] (bool: Bool?, error: NSError?) in
+            
+            if let bool = bool, bool == true {
+                let alert = UIAlertController(title: "Successfully joined", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(okAction)
+                
+                self?.productId = self?.product?.id!
+                
+                self?.present(alert, animated: true, completion: nil)
+            }
+            
             print("JOINED")
         }
     }
     
     func leaveProduct(alert: UIAlertAction) {
-        CourseBoardAPI.leaveProduct(id: (product?.id)!) { (bool: Bool?, error: NSError?) in
+        CourseBoardAPI.leaveProduct(id: (product?.id)!) { [weak self] (bool: Bool?, error: NSError?) in
+            
+            if let bool = bool, bool == true {
+                let alert = UIAlertController(title: "Successfully left", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(okAction)
+                
+                self?.productId = self?.product?.id!
+                
+                self?.present(alert, animated: true, completion: nil)
+            }
+            
             print("LEFT")
         }
     }
@@ -372,8 +401,10 @@ extension ProductViewController: UITableViewDelegate, UITableViewDataSource {
     func CollaboratorsCellForRowSetup(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCollaboratorTableViewCell") as! ProductCollaboratorTableViewCell
         
-        cell.fullNameLabel.text = product?.contributors?[indexPath.row].fullname ?? "NIL"
-        cell.usernameLabel.text = product?.contributors?[indexPath.row].username ?? "NIL"
+        cell.user = product?.contributors?[indexPath.row]
+        //cell.fullNameLabel.text = product?.contributors?[indexPath.row].fullname ?? "NIL"
+        //cell.usernameLabel.text = product?.contributors?[indexPath.row].username ?? "NIL"
+        
         
         return cell
     }
@@ -468,7 +499,7 @@ extension ProductViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == 0 && currentSegment == 0 {
             
             var link = ""
             

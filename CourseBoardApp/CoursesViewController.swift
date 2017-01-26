@@ -110,11 +110,11 @@ extension CoursesViewController {
     func addCourses() {
         
         // Get courses
-        CourseBoardAPI.getCourses { (courses: [Course]?, error: NSError?) in
+        CourseBoardAPI.getCourses { [weak self] (courses: [Course]?, error: NSError?) in
             
             // Refresh control
-            self.refreshControl.endRefreshing()
-            self.courses.value = []
+            self?.refreshControl.endRefreshing()
+            self?.courses.value = []
             
             if let _ = error {
                 return // error!
@@ -125,13 +125,13 @@ extension CoursesViewController {
             }
             
             // Add to courses
-            self.courses.value.append(SectionModel(model: "Quarter 4", items: courses.filter{$0.quarter == "4"}))
-            self.courses.value.append(SectionModel(model: "Quarter 3", items: courses.filter{$0.quarter == "3"}))
-            self.courses.value.append(SectionModel(model: "Quarter 2", items: courses.filter{$0.quarter == "2"}))
-            self.courses.value.append(SectionModel(model: "Quarter 1", items: courses.filter{$0.quarter == "1"}))
+            self?.courses.value.append(SectionModel(model: "Quarter 4", items: courses.filter{$0.quarter == "4"}))
+            self?.courses.value.append(SectionModel(model: "Quarter 3", items: courses.filter{$0.quarter == "3"}))
+            self?.courses.value.append(SectionModel(model: "Quarter 2", items: courses.filter{$0.quarter == "2"}))
+            self?.courses.value.append(SectionModel(model: "Quarter 1", items: courses.filter{$0.quarter == "1"}))
             
             // Filter emtpy quarters
-            self.courses.value = self.courses.value.filter {!$0.items.isEmpty}
+            self?.courses.value = (self?.courses.value.filter {!$0.items.isEmpty})!
         }
     }
     
