@@ -22,7 +22,6 @@ extension CourseBoardAPI {
         
         // Headers
         let headers = ["Authorization": "Basic " + CourseBoardAPI.authToken]
-        print(headers)
         
         // Request the data from api
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON() { response in
@@ -219,6 +218,7 @@ extension CourseBoardAPI {
                     
                     let token = json["token"].stringValue
                     CourseBoardAPI.authToken = token
+                    TokenHelper.saveToken(token: token)
                     
                     // Get me
                     CourseBoardAPI.getMe(complete: { (user: User?, error: NSError?) in
@@ -236,6 +236,33 @@ extension CourseBoardAPI {
                 complete(false, error as NSError?)
             }
         }
+    }
+    
+    static func alreadyLoggedIn(complete: @escaping (_ success: Bool) -> Void) {
+        
+        // If no token, return
+        guard let token = TokenHelper.getToken() else {
+            complete(false)
+            return
+        }
+        
+        // Set auth token
+        self.authToken = token
+        
+        getMe { (user: User?, error: NSError?) in
+            
+            if user == nil {
+                TokenHelper.saveToken(token: nil)
+                complete(false)
+            }
+            else {
+                self.me = user
+                complete(true)
+            }
+            
+        }
+        
+        
     }
     
     // Signup -- DONE

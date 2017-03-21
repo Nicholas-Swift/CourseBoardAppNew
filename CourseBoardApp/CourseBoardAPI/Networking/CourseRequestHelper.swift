@@ -195,7 +195,7 @@ extension CourseBoardAPI {
             return
         }
         
-        guard let instructor = course.instructor?.id else {
+        guard let _ = course.instructor?.id else {
             complete(false, NSError(domain: "No course instructor id", code: 400, userInfo: nil))
             return
         }

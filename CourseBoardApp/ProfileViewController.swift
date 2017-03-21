@@ -91,10 +91,37 @@ class ProfileViewController: UIViewController {
         functionalitySetup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: animated)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "ToProductViewController" {
+            let destination = segue.destination as! ProductViewController
+            let product = (tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! ProfileProductTableViewCell).product
+            
+            destination.product = product
+            destination.productId = product?.id
+        }
+        
+        else if segue.identifier == "ToCourseViewController" {
+            let destination = segue.destination as! CourseViewController
+            let course = (tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! ProfileCourseTableViewCell).course
+            
+            destination.course = course
+            destination.courseId = course?.id
+        }
+    }
 }
 
 // MARK: Functionality Setup
@@ -201,8 +228,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 || section == 1 {
-            return 0.001
+        if section == 0 {
+            return 10
+        }
+        
+        if section == 1 {
+            return 10
         }
         
         // Course sections
@@ -241,9 +272,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderTableViewCell") as! ProfileHeaderTableViewCell
+            
+            // Set user
             if let user = self.user {
                 cell.user = user
             }
+            
+            // Return cell
             return cell
         }
         else if indexPath.section == 1 {

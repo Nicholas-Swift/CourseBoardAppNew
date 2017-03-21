@@ -295,7 +295,7 @@ extension CourseBoardAPI {
                 
             // Success
             case .success:
-                if let value = response.result.value {
+                if let _ = response.result.value {
                     complete(true, nil)
                 }
                 
@@ -322,10 +322,10 @@ extension CourseBoardAPI {
         Alamofire.request(url, method: .put, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON() { response in
             
             switch response.result {
-                
+            
             // Success
             case .success:
-                if let value = response.result.value {
+                if let _ = response.result.value {
                     complete(true, nil)
                 }
                 

@@ -20,5 +20,4 @@ class CourseBoardAPI {
     static var storRef = FIRStorage.storage().reference()
     
     static var me: User?
-    
 }

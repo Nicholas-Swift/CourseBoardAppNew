@@ -56,6 +56,7 @@
 		018733E81E08AE550010ED2C /* PostToCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018733E71E08AE550010ED2C /* PostToCourseViewController.swift */; };
 		018733EB1E08DEEA0010ED2C /* NewProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018733EA1E08DEEA0010ED2C /* NewProductViewController.swift */; };
 		019B24231DD3B5A600110576 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B24221DD3B5A600110576 /* CourseViewController.swift */; };
+		01ADF5521E3A8013000D56C3 /* TokenHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADF5511E3A8013000D56C3 /* TokenHelper.swift */; };
 		01BDE3051E175D460018EAB5 /* FeedPostTableViewCellTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDE3041E175D460018EAB5 /* FeedPostTableViewCellTemp.swift */; };
 		01EF11D11E2F39170045C956 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EF11D01E2F39170045C956 /* GoogleService-Info.plist */; };
 		3EBA332645A07570196A2A93 /* Pods_CourseBoardApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5106AE094F391C877796AB /* Pods_CourseBoardApp.framework */; };
@@ -114,6 +115,7 @@
 		018733EA1E08DEEA0010ED2C /* NewProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductViewController.swift; sourceTree = "<group>"; };
 		019B24221DD3B5A600110576 /* CourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		019B539DB7A6BC8944B19FA6 /* Pods-CourseBoardApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseBoardApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CourseBoardApp/Pods-CourseBoardApp.release.xcconfig"; sourceTree = "<group>"; };
+		01ADF5511E3A8013000D56C3 /* TokenHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenHelper.swift; sourceTree = "<group>"; };
 		01BDE3041E175D460018EAB5 /* FeedPostTableViewCellTemp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPostTableViewCellTemp.swift; sourceTree = "<group>"; };
 		01EF11D01E2F39170045C956 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		111D35585500D9EDD18EA33A /* Pods-CourseBoardApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseBoardApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CourseBoardApp/Pods-CourseBoardApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				01723C9E1E0A12220006D500 /* DateHelper.swift */,
+				01ADF5511E3A8013000D56C3 /* TokenHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -184,11 +187,11 @@
 		01723CA61E0A12220006D500 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				01723CAB1E0A12220006D500 /* RequestHelper.swift */,
 				01723CA71E0A12220006D500 /* CompetencyRequestHelper.swift */,
 				01723CA81E0A12220006D500 /* CourseRequestHelper.swift */,
 				01723CA91E0A12220006D500 /* PostRequestHelper.swift */,
 				01723CAA1E0A12220006D500 /* ProductsRequestHelper.swift */,
-				01723CAB1E0A12220006D500 /* RequestHelper.swift */,
 				01723CAC1E0A12220006D500 /* UpdateRequestHelper.swift */,
 				01723CAD1E0A12220006D500 /* UserRequestHelper.swift */,
 				018589301E2F335B00C98755 /* FirebaseRequestHelper.swift */,
@@ -508,6 +511,7 @@
 				015D84CD1DD3C7420057F1E7 /* CoursePostTableViewCell.swift in Sources */,
 				01723CB01E0A12220006D500 /* Course.swift in Sources */,
 				01723CAE1E0A12220006D500 /* DateHelper.swift in Sources */,
+				01ADF5521E3A8013000D56C3 /* TokenHelper.swift in Sources */,
 				0116219E1E2D70B60072D2C8 /* ProductUpdateTableViewCell.swift in Sources */,
 				0185FCD71DD1C87700BF91A3 /* CoursesViewController.swift in Sources */,
 			);
@@ -637,9 +641,10 @@
 				INFOPLIST_FILE = CourseBoardApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nicholas-swift.CourseBoardApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nicholas-swift.CourseBoard1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -652,9 +657,10 @@
 				INFOPLIST_FILE = CourseBoardApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nicholas-swift.CourseBoardApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nicholas-swift.CourseBoard1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

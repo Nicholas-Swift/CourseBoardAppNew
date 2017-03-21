@@ -39,6 +39,18 @@ class User {
     static var picsDict: [String: UIImage] = [:]
     var profilePic: UIImage?
     
+    lazy var totalAmount: Float = { [unowned self] in
+        let bool = self.admin
+        
+        if bool == false {
+            return 0
+        }
+        else {
+            return 1
+        }
+        
+    }()
+    
     init() {
         
     }

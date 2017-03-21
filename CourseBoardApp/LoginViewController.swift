@@ -36,6 +36,15 @@ class LoginViewController: UIViewController {
         usernameTextField.becomeFirstResponder()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! UITabBarController
+        
+        // Load all views first
+        for vc in destination.viewControllers! {
+            let _ = (vc as! UINavigationController).viewControllers[0].view
+        }
+    }
+    
 }
 
 // MARK: - Setup
